@@ -20,7 +20,7 @@ function formatDateRange($startDate, $endDate)
     );
 }
 
-function generateWordDocument($templatePath, $user, $startDate, $endDate, $salaryNoc, $salary)
+function generateWordDocument($templatePath, $user, $startDate, $endDate, $salaryNoc, $salary, $country)
 {
     if (!file_exists($templatePath)) {
         error_log("Template file does not exist: $templatePath");
@@ -39,6 +39,7 @@ function generateWordDocument($templatePath, $user, $startDate, $endDate, $salar
         'TRAVEL_DATE' => formatDateRange($startDate, $endDate),
         'SALARY' => $salary,
         'SALARY_NOC' => $salaryNoc,
+        'COUNTRY' => $country,
     ];
 
     foreach ($templateData as $placeholder => $value) {
@@ -57,3 +58,4 @@ function getUserInfo($userId)
     $userResponse = CRest::call('user.get', ['ID' => $userId]);
     return $userResponse['result'][0] ?? null;
 }
+

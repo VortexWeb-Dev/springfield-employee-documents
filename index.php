@@ -35,8 +35,12 @@
                     <h3 class="text-xl font-semibold mb-4">No Objection Certificate (NOC)</h3>
                     <form action="download.php" method="post" class="space-y-4">
                         <input type="hidden" name="documentType" value="noc">
+                        
                         <label for="currentSalaryNoc" class="block text-gray-700 text-sm font-bold mb-2">Current Salary:</label>
                         <input required type="number" id="currentSalaryNoc" name="currentSalaryNoc" placeholder="Enter your current salary" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600">
+                        
+                        <label for="country" class="block text-gray-700 text-sm font-bold mb-2">Country:</label>
+                        <input required type="text" id="country" name="country" placeholder="Enter the country name" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600">
 
                         <!-- Travel Start Date -->
                         <label for="startDate" class="block text-gray-700 text-sm font-bold mb-2">Travel Start Date:</label>

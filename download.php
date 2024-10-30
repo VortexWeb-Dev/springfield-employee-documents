@@ -30,7 +30,8 @@ if (isset($_POST['documentType'])) {
         $_POST['startDate'] ?? null,
         $_POST['endDate'] ?? null,
         $_POST['currentSalaryNoc'] ?? null,
-        $_POST['currentSalary'] ?? null
+        $_POST['currentSalary'] ?? null,
+        $_POST['country'] ?? null
     );
 
     if ($wordFile) {
@@ -48,3 +49,4 @@ if (isset($_POST['documentType'])) {
 } else {
     echo "No document type specified.";
 }
+
