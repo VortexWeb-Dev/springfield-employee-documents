@@ -40,6 +40,7 @@ function generateWordDocument($templatePath, $user, $startDate, $endDate, $salar
         'SALARY' => $salary,
         'SALARY_NOC' => $salaryNoc,
         'COUNTRY' => $country,
+        'CURRENT_DATE' => getTodayDateFormatted()
     ];
 
     foreach ($templateData as $placeholder => $value) {
@@ -59,3 +60,7 @@ function getUserInfo($userId)
     return $userResponse['result'][0] ?? null;
 }
 
+function getTodayDateFormatted()
+{
+    return date('jS F Y');
+}
