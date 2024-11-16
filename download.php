@@ -14,7 +14,7 @@ if (isset($_POST['documentType'])) {
     $currentUser = CRest::call('user.current');
     $userId = $currentUser['result']['ID'];
 
-    $user = getUserInfo(14);
+    $user = getUserInfo($userId);
     if (!$user) {
         echo "User information could not be retrieved.";
         exit;
@@ -31,6 +31,7 @@ if (isset($_POST['documentType'])) {
         $_POST['currentSalaryNoc'] ?? null,
         $_POST['currentSalary'] ?? null,
         $_POST['addressTo'] ?? null,
+        $_POST['addressToNoc'] ?? null,
         $_POST['nocReason'] ?? null,
         $_POST['country'] ?? 'UAE'
     );

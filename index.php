@@ -59,7 +59,7 @@
 
                     <div>
                         <label for="addressToNoc" class="block text-gray-600 text-sm font-medium">Address To:</label>
-                        <input required type="text" id="addressToNoc" name="country" placeholder="Enter the recipient address"
+                        <input required type="text" id="addressToNoc" name="addressToNoc" placeholder="Enter the recipient address"
                             class="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring focus:ring-blue-500" required>
                     </div>
 
@@ -84,13 +84,13 @@
 
                     <div id="startDateContainer" class="hidden">
                         <label for="startDate" class="block text-gray-600 text-sm font-medium">Travel Start Date:</label>
-                        <input required type="date" id="startDate" name="startDate"
+                        <input type="date" id="startDate" name="startDate"
                             class="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring focus:ring-blue-500">
                     </div>
 
                     <div id="endDateContainer" class="hidden">
                         <label for="endDate" class="block text-gray-600 text-sm font-medium">Travel End Date:</label>
-                        <input required type="date" id="endDate" name="endDate"
+                        <input type="date" id="endDate" name="endDate"
                             class="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring focus:ring-blue-500">
                     </div>
 

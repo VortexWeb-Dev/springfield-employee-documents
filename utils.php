@@ -20,7 +20,7 @@ function formatDateRange($startDate, $endDate)
     );
 }
 
-function generateWordDocument($templatePath, $user, $startDate, $endDate, $salaryNoc, $salary, $address_to, $noc_reason, $country)
+function generateWordDocument($templatePath, $user, $startDate, $endDate, $salaryNoc, $salary, $address_to, $address_to_noc, $noc_reason, $country)
 {
     if (!file_exists($templatePath)) {
         error_log("Template file does not exist: $templatePath");
@@ -39,6 +39,7 @@ function generateWordDocument($templatePath, $user, $startDate, $endDate, $salar
         'SALARY' => $salary,
         'SALARY_NOC' => $salaryNoc,
         'ADDRESS_TO' => $address_to,
+        'ADDRESS_TO_NOC' => $address_to_noc,
         'CURRENT_DATE' => getTodayDateFormatted(),
         'NOC_SENTENCE' => generateNocSentence($noc_reason, $country, formatDateRange($startDate, $endDate)),
         'NOC_REASON' => generateNocReasonText($noc_reason, $country),
