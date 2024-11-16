@@ -20,7 +20,7 @@ function formatDateRange($startDate, $endDate)
     );
 }
 
-function generateWordDocument($templatePath, $user, $startDate, $endDate, $salaryNoc, $salary, $country)
+function generateWordDocument($templatePath, $user, $startDate, $endDate, $salaryNoc, $salary, $address_to, $noc_reason, $country)
 {
     if (!file_exists($templatePath)) {
         error_log("Template file does not exist: $templatePath");
@@ -36,11 +36,12 @@ function generateWordDocument($templatePath, $user, $startDate, $endDate, $salar
         'PASSPORT_NUMBER' => $user['UF_USR_1727158618234'],
         'DATE_OF_JOINING' => (new DateTime($user['UF_USR_1727158528318']))->format('F Y'),
         'POSITION' => $user['WORK_POSITION'],
-        'TRAVEL_DATE' => formatDateRange($startDate, $endDate),
         'SALARY' => $salary,
         'SALARY_NOC' => $salaryNoc,
-        'COUNTRY' => $country,
-        'CURRENT_DATE' => getTodayDateFormatted()
+        'ADDRESS_TO' => $address_to,
+        'CURRENT_DATE' => getTodayDateFormatted(),
+        'NOC_SENTENCE' => generateNocSentence($noc_reason, $country, formatDateRange($startDate, $endDate)),
+        'NOC_REASON' => generateNocReasonText($noc_reason, $country),
     ];
 
     foreach ($templateData as $placeholder => $value) {
@@ -63,4 +64,66 @@ function getUserInfo($userId)
 function getTodayDateFormatted()
 {
     return date('jS F Y');
+}
+
+function generateNocSentence($noc_reason, $country, $travel_date)
+{
+    $nocSentence = '';
+
+    switch ($noc_reason) {
+        case 'visa_application':
+            $nocSentence = "will be applying for a $country Visa for his/her travel from the $travel_date for his/her annual vacation leave.";
+            break;
+        case 'travel':
+            $nocSentence = "will be traveling to $country from the $travel_date.";
+            break;
+        case 'mortgage_application':
+            $nocSentence = "will be applying for a mortgage loan in $country.";
+            break;
+        case 'credit_card_application':
+            $nocSentence = "will be applying for a credit card in $country.";
+            break;
+        case 'debit_card_application':
+            $nocSentence = "will be applying for a debit card in $country.";
+            break;
+        case 'bank_account_application':
+            $nocSentence = "will be applying to open a bank account in $country.";
+            break;
+        default:
+            $nocSentence = "will be applying for necessary processes in $country.";
+            break;
+    }
+
+    return $nocSentence;
+}
+
+function generateNocReasonText($noc_reason, $country)
+{
+    $nocReasonText = '';
+
+    switch ($noc_reason) {
+        case 'visa_application':
+            $nocReasonText = "No Objection Letter for $country Visa Application and Travel.";
+            break;
+        case 'travel':
+            $nocReasonText = "No Objection Letter for Travel to $country.";
+            break;
+        case 'mortgage_application':
+            $nocReasonText = "No Objection Letter for applying for a mortgage loan in $country.";
+            break;
+        case 'credit_card_application':
+            $nocReasonText = "No Objection Letter for applying for a credit card in $country.";
+            break;
+        case 'debit_card_application':
+            $nocReasonText = "No Objection Letter for applying for a debit card in $country.";
+            break;
+        case 'bank_account_application':
+            $nocReasonText = "No Objection Letter for opening a bank account in $country.";
+            break;
+        default:
+            $nocReasonText = "No Objection Letter for necessary processes in $country.";
+            break;
+    }
+
+    return $nocReasonText;
 }

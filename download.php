@@ -2,6 +2,7 @@
 require_once 'utils.php';
 
 if (isset($_POST['documentType'])) {
+
     $documentType = $_POST['documentType'];
     $templatePath = __DIR__ . "/templates/" . ($documentType === 'salary_certificate' ? 'Salary.docx' : ($documentType === 'noc' ? 'NOC.docx' : ''));
 
@@ -13,17 +14,15 @@ if (isset($_POST['documentType'])) {
     $currentUser = CRest::call('user.current');
     $userId = $currentUser['result']['ID'];
 
-    $user = getUserInfo($userId);
+    $user = getUserInfo(14);
     if (!$user) {
         echo "User information could not be retrieved.";
         exit;
     }
 
-    // Sanitize the user's full name for filename
     $fullName = trim($user['NAME'] . ' ' . $user['LAST_NAME']);
     $sanitizedFileName = preg_replace('/[^A-Za-z0-9_\-]/', '_', $fullName);
 
-    // Generate the Word document
     $wordFile = generateWordDocument(
         $templatePath,
         $user,
@@ -31,7 +30,9 @@ if (isset($_POST['documentType'])) {
         $_POST['endDate'] ?? null,
         $_POST['currentSalaryNoc'] ?? null,
         $_POST['currentSalary'] ?? null,
-        $_POST['country'] ?? null
+        $_POST['addressTo'] ?? null,
+        $_POST['nocReason'] ?? null,
+        $_POST['country'] ?? 'UAE'
     );
 
     if ($wordFile) {
@@ -49,4 +50,3 @@ if (isset($_POST['documentType'])) {
 } else {
     echo "No document type specified.";
 }
-

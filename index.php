@@ -30,13 +30,13 @@
                     <div>
                         <label for="currentSalary" class="block text-gray-600 text-sm font-medium">Current Salary:</label>
                         <input required type="number" id="currentSalary" name="currentSalary" placeholder="Enter your current salary"
-                            class="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring focus:ring-blue-500">
+                            class="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring focus:ring-blue-500" required>
                     </div>
 
                     <div>
-                        <label for="country" class="block text-gray-600 text-sm font-medium">Country:</label>
-                        <input required type="text" id="country" name="country" placeholder="Enter the country name"
-                            class="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring focus:ring-blue-500">
+                        <label for="addressTo" class="block text-gray-600 text-sm font-medium">Address To:</label>
+                        <input required type="text" id="addressTo" name="addressTo" placeholder="Enter the recipient address"
+                            class="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring focus:ring-blue-500" required>
                     </div>
 
                     <button type="submit" class="w-full bg-blue-600 text-white py-2 mt-4 rounded-lg font-medium hover:bg-blue-700 transition-colors">
@@ -54,22 +54,41 @@
                     <div>
                         <label for="currentSalaryNoc" class="block text-gray-600 text-sm font-medium">Current Salary:</label>
                         <input required type="number" id="currentSalaryNoc" name="currentSalaryNoc" placeholder="Enter your current salary"
+                            class="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring focus:ring-blue-500" required>
+                    </div>
+
+                    <div>
+                        <label for="addressToNoc" class="block text-gray-600 text-sm font-medium">Address To:</label>
+                        <input required type="text" id="addressToNoc" name="country" placeholder="Enter the recipient address"
+                            class="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring focus:ring-blue-500" required>
+                    </div>
+
+                    <div>
+                        <label for="country" class="block text-gray-600 text-sm font-medium">Country:</label>
+                        <input required type="text" id="country" name="country" placeholder="Enter NOC relevant country (if applicable)"
                             class="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring focus:ring-blue-500">
                     </div>
 
                     <div>
-                        <label for="countryNoc" class="block text-gray-600 text-sm font-medium">Country:</label>
-                        <input required type="text" id="countryNoc" name="country" placeholder="Enter the country name"
-                            class="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring focus:ring-blue-500">
+                        <label for="nocReason" class="block text-gray-600 text-sm font-medium">NOC Reason:</label>
+                        <select name="nocReason" id="nocReason" class="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring focus:ring-blue-500" required>
+                            <option value="">Select Reason</option>
+                            <option value="travel">Travel</option>
+                            <option value="visa_application">Visa Application</option>
+                            <option value="mortgage_application">Mortgage Application</option>
+                            <option value="credit_card_application">Credit Card Application</option>
+                            <option value="debit_card_application">Debit Card Application</option>
+                            <option value="bank_account_opening">Bank Account Opening</option>
+                        </select>
                     </div>
 
-                    <div>
+                    <div id="startDateContainer" class="hidden">
                         <label for="startDate" class="block text-gray-600 text-sm font-medium">Travel Start Date:</label>
                         <input required type="date" id="startDate" name="startDate"
                             class="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring focus:ring-blue-500">
                     </div>
 
-                    <div>
+                    <div id="endDateContainer" class="hidden">
                         <label for="endDate" class="block text-gray-600 text-sm font-medium">Travel End Date:</label>
                         <input required type="date" id="endDate" name="endDate"
                             class="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring focus:ring-blue-500">
@@ -91,6 +110,21 @@
     <script>
         // Set current year in footer
         document.getElementById("year").textContent = new Date().getFullYear();
+
+        const nocReasonInput = document.getElementById('nocReason');
+        const startDateContainer = document.getElementById('startDateContainer');
+        const endDateContainer = document.getElementById('endDateContainer');
+
+        nocReasonInput.addEventListener('change', function() {
+            const selectedReason = nocReasonInput.value;
+            if (selectedReason === 'travel') {
+                startDateContainer.classList.remove('hidden');
+                endDateContainer.classList.remove('hidden');
+            } else {
+                startDateContainer.classList.add('hidden');
+                endDateContainer.classList.add('hidden');
+            }
+        });
     </script>
 
 </body>
