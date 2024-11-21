@@ -6,7 +6,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <div class="p-6">
         <h1 class="font-bold mb-8 text-white text-center hover:text-gray-300">
             <a href="index.php" class="flex flex-col">
-                <span class="text-xl">Employee Documents</span>
+                <span class="text-xl">HR</span>
             </a>
         </h1>
         <ul class="flex flex-col gap-2">
@@ -35,6 +35,16 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <li>
                 <a href="https://crm.springfieldproperties.ae/bizproc/processes/20/view/0/" target="_blank" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
                     <i class="fas fa-calendar-check mr-2"></i> Leave Application
+                </a>
+            </li>
+            <li>
+                <a href="https://crm.springfieldproperties.ae/marketplace/app/37/" target="_blank" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+                    <i class="fas fa-graduation-cap mr-2"></i> Springfield Academy
+                </a>
+            </li>
+            <li>
+                <a href="https://crm.springfieldproperties.ae/marketplace/app/47/" target="_blank" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700">
+                    <i class="fas fa-user-plus mr-2"></i> Onboarding
                 </a>
             </li>
         </ul>
