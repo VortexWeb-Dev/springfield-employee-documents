@@ -87,7 +87,7 @@ function generateNocSentence($noc_reason, $country, $travel_date)
         case 'debit_card_application':
             $nocSentence = "will be applying for a debit card in $country.";
             break;
-        case 'bank_account_application':
+        case 'bank_account_opening':
             $nocSentence = "will be applying to open a bank account in $country.";
             break;
         default:
