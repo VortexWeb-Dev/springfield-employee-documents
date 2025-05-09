@@ -1,6 +1,5 @@
 <?php
-require_once 'utils.php';
-require __DIR__ . '/crest/crestcurrent.php';
+require_once __DIR__ . '/utils.php';
 require_once __DIR__ . '/crest/crest.php';
 
 if (isset($_POST['documentType'])) {
@@ -13,10 +12,9 @@ if (isset($_POST['documentType'])) {
         exit;
     }
 
-    $currentUser = CRestCurrent::call('user.current');
-    $userId = $currentUser['result']['ID'];
+    $userResponse = CRest::call('user.current');
 
-    $user = getUserInfo($userId);
+    $user = $userResponse['result'];
     if (!$user) {
         echo "User information could not be retrieved.";
         exit;

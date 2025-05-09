@@ -1,8 +1,7 @@
 <?php
 
-require 'vendor/autoload.php';
-require_once 'crest/crest.php';
-require_once 'utils.php';
+require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/crest/crest.php';
 
 use PhpOffice\PhpWord\TemplateProcessor;
 
