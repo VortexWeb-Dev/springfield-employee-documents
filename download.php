@@ -1,7 +1,5 @@
 <?php
 require_once __DIR__ . '/utils.php';
-require_once __DIR__ . '/crest/crest.php';
-require_once __DIR__ . '/crest/crestcurrent.php';
 
 if (isset($_POST['documentType'])) {
 
@@ -13,11 +11,15 @@ if (isset($_POST['documentType'])) {
         exit;
     }
 
-    $userResponse = CRestCurrent::call('user.current');
+    $userFile = __DIR__ . '/current_user.json';
+    if (!file_exists($userFile)) {
+        echo "User information is not available.";
+        exit;
+    }
 
-    $user = $userResponse['result'];
+    $user = json_decode(file_get_contents($userFile), true);
     if (!$user) {
-        echo "User information could not be retrieved.";
+        echo "User data is invalid.";
         exit;
     }
 
