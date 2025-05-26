@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/utils.php';
 require_once __DIR__ . '/crest/crest.php';
+require_once __DIR__ . '/crest/crestcurrent.php';
 
 if (isset($_POST['documentType'])) {
 
@@ -12,7 +13,7 @@ if (isset($_POST['documentType'])) {
         exit;
     }
 
-    $userResponse = CRest::call('user.current');
+    $userResponse = CRestCurrent::call('user.current');
 
     $user = $userResponse['result'];
     if (!$user) {
