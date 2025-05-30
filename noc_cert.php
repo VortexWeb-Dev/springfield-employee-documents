@@ -13,6 +13,7 @@ include('includes/components/sidebar.php');
                 <h3 class="text-xl font-semibold text-gray-800 text-center mb-4">No Objection Certificate (NOC)</h3>
                 <form action="download.php" method="post" class="space-y-4">
                     <input type="hidden" name="documentType" value="noc">
+                    <input type="hidden" name="userId" value="<?php echo $_GET['user_id']; ?>">
 
                     <div>
                         <label for="currentSalaryNoc" class="block text-gray-600 text-sm font-medium">Current Salary:</label>

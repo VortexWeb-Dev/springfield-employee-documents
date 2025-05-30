@@ -1,11 +1,13 @@
 <?php
 $current_page = basename($_SERVER['PHP_SELF']);
+$query_string = $_SERVER['QUERY_STRING'];
+$query_suffix = $query_string ? '?' . htmlspecialchars($query_string) : '';
 ?>
 
 <div class="sidebar bg-gray-800 text-white min-h-screen hidden md:flex flex-col justify-between w-max" id="sidebar">
     <div class="p-6">
         <h1 class="font-bold mb-8 text-white text-center hover:text-gray-300">
-            <a href="index.php" class="flex flex-col">
+            <a href="index.php<?php echo $query_suffix; ?>" class="flex flex-col">
                 <span class="text-xl">HR</span>
             </a>
         </h1>
@@ -19,14 +21,14 @@ $current_page = basename($_SERVER['PHP_SELF']);
             foreach ($links as $link => $data) {
                 list($label, $icon) = $data;
 
-                // Determine if the current page matches or starts with specific keywords
-                $active = '';
-                if ($current_page === $link) {
-                    $active = 'bg-gray-700';
-                }
+                // Mark active item
+                $active = ($current_page === $link) ? 'bg-gray-700' : '';
+
+                // Append query string
+                $fullLink = $link . $query_suffix;
 
                 echo '<li>
-                        <a href="' . $link . '" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 ' . $active . '">
+                        <a href="' . $fullLink . '" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 ' . $active . '">
                             <i class="' . $icon . ' mr-2"></i> ' . $label . '
                         </a>
                       </li>';
@@ -49,9 +51,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
             </li>
         </ul>
     </div>
-    <!-- <div class="p-6 text-sm text-gray-400 text-center">
-        © <?php echo date('Y'); ?> - Springfield
-    </div> -->
 </div>
 
 <div class="md:hidden flex flex-col justify-between w-max">
@@ -70,10 +69,9 @@ $current_page = basename($_SERVER['PHP_SELF']);
     const menuIcon = document.getElementById('menuIcon');
 
     toggleButton.addEventListener('click', () => {
-        sidebar.classList.toggle('hidden'); // Toggle sidebar visibility
-        overlay.classList.toggle('hidden'); // Toggle overlay visibility
+        sidebar.classList.toggle('hidden');
+        overlay.classList.toggle('hidden');
 
-        // Check the presence of the 'hidden' class and update the icon accordingly
         if (sidebar.classList.contains('hidden')) {
             menuIcon.classList.add('fa-bars');
             menuIcon.classList.remove('fa-times');
@@ -83,7 +81,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
         }
     });
 
-    // Close sidebar when clicking outside of it
     overlay.addEventListener('click', () => {
         sidebar.classList.add('hidden');
         overlay.classList.add('hidden');

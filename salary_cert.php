@@ -13,6 +13,7 @@ include('includes/components/sidebar.php');
                 <h3 class="text-xl font-semibold text-gray-800 text-center mb-4">Salary Certificate</h3>
                 <form action="download.php" method="post" class="space-y-4">
                     <input type="hidden" name="documentType" value="salary_certificate">
+                    <input type="hidden" name="userId" value="<?php echo $_GET['user_id']; ?>">
 
                     <div>
                         <label for="currentSalary" class="block text-gray-600 text-sm font-medium">Current Salary:</label>

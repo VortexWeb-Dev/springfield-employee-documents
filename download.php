@@ -1,7 +1,10 @@
 <?php
 require_once __DIR__ . '/utils.php';
+require_once __DIR__ . '/crest/crest.php';
 
 if (isset($_POST['documentType'])) {
+
+    print_r($_POST);
 
     $documentType = $_POST['documentType'];
     $templatePath = __DIR__ . "/templates/" . ($documentType === 'salary_certificate' ? 'Salary.docx' : ($documentType === 'noc' ? 'NOC.docx' : ''));
@@ -11,13 +14,10 @@ if (isset($_POST['documentType'])) {
         exit;
     }
 
-    $userFile = __DIR__ . '/current_user.json';
-    if (!file_exists($userFile)) {
-        echo "User information is not available.";
-        exit;
-    }
+    $userId = isset($_POST['userId']) ? intval($_POST['userId']) : 0;
+    $user = CRest::call('user.get', ['ID' => $userId])['result'][0] ?? null;
+    print_r($user);
 
-    $user = json_decode(file_get_contents($userFile), true);
     if (!$user) {
         echo "User data is invalid.";
         exit;
